@@ -56,7 +56,8 @@ public class UserController {
     //Delete User
     @GetMapping("/users")
     public List<User> userList(){
-         return this.userService.listOfUsers();
+
+        return this.userService.listOfUsers();
     }
 
     @ExceptionHandler(UserNotFoundException.class)
