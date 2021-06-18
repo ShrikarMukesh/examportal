@@ -18,8 +18,10 @@ export class LoginComponent implements OnInit {
   constructor(private snack:MatSnackBar,private login:LoginService,private router:Router) { }
 
   ngOnInit(): void {
+
   }
   formSubmit(){
+    
     console.log("login btn submit");
 
     if(this.loginData.username.trim() =='' || this.loginData.username==null){
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit {
     //request to server to generate token
 
     this.login.generateToken(this.loginData).subscribe(
-        (data:any)=>{
+        
+      (data:any)=>{
           console.log('sucess');
           console.log(data)
           //login....
@@ -54,11 +57,13 @@ export class LoginComponent implements OnInit {
                     //admin dashboard
                     //window.location.href = '/admin';
                     this.router.navigate(['admin']);
+                    this.login.loginStatusSubject.next(true);
                 }
                 else if(this.login.getUserRole() == 'NORMAL'){
                     //Normal User Dashboard
                     //window.location.href = '/user-dashboard';
                     this.router.navigate(['user-dashboard']);
+                    this.login.loginStatusSubject.next(true);
                 }
                 else{
                      this.login.logout();
